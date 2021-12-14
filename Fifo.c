@@ -21,7 +21,7 @@ int fifo[16];
 int pos = 0;
 int pos2 = 0;
 int endRead = 0;
-int temp_vrednost = 0;
+int temp_vrednost = 1;
 int provera = 0;
 
 int fifo_open(struct inode *pinode, struct file *pfile);
@@ -74,14 +74,14 @@ ssize_t fifo_read(struct file *pfile, char __user *buffer, size_t length, loff_t
 			if(ret)
 				return -EFAULT;
 			printk(KERN_INFO "Succesfully read\n");
-			
+
+			provera++;
 			if(provera == temp_vrednost)
 			{
 				endRead = 1;
 				provera = 0;
 			}
 			
-			provera++;
 			pos2 ++;
 		}
 	
